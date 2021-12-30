@@ -108,96 +108,17 @@ myEditor = "vim"  -- Sets emacs as editor
 myBorderWidth :: Dimension
 myBorderWidth = 2           -- Sets border width for windows
 
-myNormColor :: String       -- Border color of normal windows
-myNormColor   = ""   -- This variable is imported from Colors.THEME
-
 myFocusColor :: String      -- Border color of focused windows
 myFocusColor  = "#5f5286"     -- This variable is imported from Colors.THEME
 
+myNormColor = "#000000"
 
 myStartupHook :: X ()
 myStartupHook = do
 
     spawnOnce "picom"
-
-    -- spawnOnce "~/.fehbg &"  -- set last saved feh wallpaper
-    -- spawnOnce "feh --randomize --bg-fill ~/wallpapers/*"  -- feh set random wallpaper
     -- spawnOnce "nitrogen --restore &"   -- if you prefer nitrogen to feh
 
-myColorizer :: Window -> Bool -> X (String, String)
-myColorizer = colorRangeFromClassName
-                  (0x28,0x2c,0x34) -- lowest inactive bg
-                  (0x28,0x2c,0x34) -- highest inactive bg
-                  (0xc7,0x92,0xea) -- active bg
-                  (0xc0,0xa7,0x9a) -- inactive fg
-                  (0x28,0x2c,0x34) -- active fg
-
--- gridSelect menu layout
-mygridConfig :: p -> GSConfig Window
-mygridConfig colorizer = (buildDefaultGSConfig myColorizer)
-    { gs_cellheight   = 40
-    , gs_cellwidth    = 200
-    , gs_cellpadding  = 6
-    , gs_originFractX = 0.5
-    , gs_originFractY = 0.5
-    , gs_font         = myFont
-    }
-
-spawnSelected' :: [(String, String)] -> X ()
-spawnSelected' lst = gridselect conf lst >>= flip whenJust spawn
-    where conf = def
-                   { gs_cellheight   = 40
-                   , gs_cellwidth    = 200
-                   , gs_cellpadding  = 6
-                   , gs_originFractX = 0.5
-                   , gs_originFractY = 0.5
-                   , gs_font         = myFont
-                   }
-
-myAppGrid = [ ("Audacity", "audacity")
-                 , ("Deadbeef", "deadbeef")
-                 , ("Emacs", "emacsclient -c -a emacs")
-                 , ("Firefox", "firefox")
-                 , ("Geany", "geany")
-                 , ("Geary", "geary")
-                 , ("Gimp", "gimp")
-                 , ("Kdenlive", "kdenlive")
-                 , ("LibreOffice Impress", "loimpress")
-                 , ("LibreOffice Writer", "lowriter")
-                 , ("OBS", "obs")
-                 , ("PCManFM", "pcmanfm")
-                 ]
-
-myScratchPads :: [NamedScratchpad]
-myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
-                , NS "mocp" spawnMocp findMocp manageMocp
-                , NS "calculator" spawnCalc findCalc manageCalc
-                ]
-  where
-    spawnTerm  = myTerminal ++ " -t scratchpad"
-    findTerm   = title =? "scratchpad"
-    manageTerm = customFloating $ W.RationalRect l t w h
-               where
-                 h = 0.9
-                 w = 0.9
-                 t = 0.95 -h
-                 l = 0.95 -w
-    spawnMocp  = myTerminal ++ " -t mocp -e mocp"
-    findMocp   = title =? "mocp"
-    manageMocp = customFloating $ W.RationalRect l t w h
-               where
-                 h = 0.9
-                 w = 0.9
-                 t = 0.95 -h
-                 l = 0.95 -w
-    spawnCalc  = "qalculate-gtk"
-    findCalc   = className =? "Qalculate-gtk"
-    manageCalc = customFloating $ W.RationalRect l t w h
-               where
-                 h = 0.5
-                 w = 0.4
-                 t = 0.75 -h
-                 l = 0.70 -w
 
 --Makes setting the spacingRaw simpler to write. The spacingRaw module adds a configurable amount of space around windows.
 mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
@@ -281,13 +202,13 @@ wideAccordion  = renamed [Replace "wideAccordion"]
 
 -- setting colors for tabs layout and tabs sublayout.
 myTabTheme = def { fontName            = myFont
-                 , activeColor         = color15
-                 , inactiveColor       = color08
-                 , activeBorderColor   = color15
-                 , inactiveBorderColor = colorBack
-                 , activeTextColor     = colorBack
-                 , inactiveTextColor   = color16
-                 }
+                , activeColor         = color15
+                , inactiveColor       = color08
+                , activeBorderColor   = color15
+                , inactiveBorderColor = colorBack
+                , activeTextColor     = colorBack
+                , inactiveTextColor   = color16
+                }
 
 -- Theme for showWName which prints current workspace when you change workspaces.
 myShowWNameTheme :: SWNConfig
@@ -346,7 +267,7 @@ myManageHook = composeAll
      , className =? "VirtualBox Manager" --> doShift  ( myWorkspaces !! 4 )
      , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      , isFullscreen -->  doFullFloat
-     ] <+> namedScratchpadManageHook myScratchPads
+     ]
 
 -- START_KEYS
 myKeys :: [(String, X ())]
@@ -363,26 +284,6 @@ myKeys =
 
     -- KB_GROUP Run Prompt
         , ("M-S-<Return>", spawn "rofi -show run") -- Dmenu
-
-    -- KB_GROUP Other Dmenu Prompts
-    -- In Xmonad and many tiling window managers, M-p is the default keybinding to
-    -- launch dmenu_run, so I've decided to use M-p plus KEY for these dmenu scripts.
---        , ("M-p h", spawn "dm-hub")           -- allows access to all dmscripts
---        , ("M-p a", spawn "dm-sounds")        -- choose an ambient background
---        , ("M-p b", spawn "dm-setbg")         -- set a background
---        , ("M-p c", spawn "dtos-colorscheme") -- choose a colorscheme
---        , ("M-p C", spawn "dm-colpick")       -- pick color from our scheme
---        , ("M-p e", spawn "dm-confedit")      -- edit config files
---        , ("M-p i", spawn "dm-maim")          -- screenshots (images)
---        , ("M-p k", spawn "dm-kill")          -- kill processes
---        , ("M-p m", spawn "dm-man")           -- manpages
---        , ("M-p n", spawn "dm-note")          -- store one-line notes and copy them
---        , ("M-p o", spawn "dm-bookman")       -- qutebrowser bookmarks/history
---        , ("M-p p", spawn "passmenu")         -- passmenu
---        , ("M-p q", spawn "dm-logout")        -- logout menu
---        , ("M-p r", spawn "dm-reddit")        -- reddio (a reddit viewer)
---        , ("M-p s", spawn "dm-websearch")     -- search various search engines
---        , ("M-p t", spawn "dm-translate")     -- translate text (Google Translate)
 
     -- KB_GROUP Useful programs to have a keybinding for launch
         , ("M-<Return>", spawn (myTerminal))
@@ -408,10 +309,6 @@ myKeys =
         , ("C-M1-h", decScreenSpacing 4)         -- Decrease screen spacing
         , ("C-M1-l", incScreenSpacing 4)         -- Increase screen spacing
 
-    -- KB_GROUP Grid Select (CTR-g followed by a key)
-        , ("C-g g", spawnSelected' myAppGrid)                 -- grid select favorite apps
-        , ("C-g t", goToSelected $ mygridConfig myColorizer)  -- goto selected window
-        , ("C-g b", bringSelected $ mygridConfig myColorizer) -- bring selected window
 
     -- KB_GROUP Windows navigation
         , ("M-m", windows W.focusMaster)  -- Move focus to the master window
@@ -452,13 +349,6 @@ myKeys =
         , ("M-C-.", onGroup W.focusUp')    -- Switch focus to next tab
         , ("M-C-,", onGroup W.focusDown')  -- Switch focus to prev tab
 
-    -- KB_GROUP Scratchpads
-    -- Toggle show/hide these programs.  They run on a hidden workspace.
-    -- When you toggle them to show, it brings them to your current workspace.
-    -- Toggle them to hide and it sends them back to hidden workspace (NSP).
-        , ("M-s t", namedScratchpadAction myScratchPads "terminal")
-        , ("M-s m", namedScratchpadAction myScratchPads "mocp")
-        , ("M-s c", namedScratchpadAction myScratchPads "calculator")
 
     -- KB_GROUP Controls for mocp music player (SUPER-u followed by a key)
         , ("M-u p", spawn "mocp --play")
@@ -524,30 +414,5 @@ defaults = def{
         , borderWidth        = myBorderWidth
         , normalBorderColor  = myNormColor
         , focusedBorderColor = myFocusColor
-        , logHook = dynamicLogWithPP $ namedScratchpadFilterOutWorkspacePP $ xmobarPP
-              -- XMOBAR SETTINGS
---              { ppOutput = \x -> hPutStrLn xmproc0 x   -- xmobar on monitor 1
---                              >> hPutStrLn xmproc1 x   -- xmobar on monitor 2
---                              >> hPutStrLn xmproc2 x   -- xmobar on monitor 3
---                -- Current workspace
---              , ppCurrent = xmobarColor color06 "" . wrap
---                            ("<box type=Bottom width=2 mb=2 color=" ++ color06 ++ ">") "</box>"
---                -- Visible but not current workspace
---              , ppVisible = xmobarColor color06 "" . clickable
---                -- Hidden workspace
---              , ppHidden = xmobarColor color05 "" . wrap
---                           ("<box type=Top width=2 mt=2 color=" ++ color05 ++ ">") "</box>" . clickable
---                -- Hidden workspaces (no windows)
---              , ppHiddenNoWindows = xmobarColor color05 ""  . clickable
---                -- Title of active window
---              , ppTitle = xmobarColor color16 "" . shorten 60
---                -- Separator character
---              , ppSep =  "<fc=" ++ color09 ++ "> <fn=1>|</fn> </fc>"
---                -- Urgent workspace
---              , ppUrgent = xmobarColor color02 "" . wrap "!" "!"
---                -- Adding # of windows on current workspace to the bar
---              , ppExtras  = [windowCount]
---                -- order of things in xmobar
---              , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
---              }
+ --       , logHook = dynamicLogWithPP
         } `additionalKeysP` myKeys 
