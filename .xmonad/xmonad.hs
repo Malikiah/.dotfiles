@@ -106,7 +106,7 @@ myEditor = "vim"  -- Sets emacs as editor
 -- myEditor = myTerminal ++ " -e vim "    -- Sets vim as editor
 
 myBorderWidth :: Dimension
-myBorderWidth = 2           -- Sets border width for windows
+myBorderWidth = 3          -- Sets border width for windows
 
 myFocusColor :: String      -- Border color of focused windows
 myFocusColor  = "#5f5286"     -- This variable is imported from Colors.THEME
@@ -135,7 +135,6 @@ mySpacing' i = spacingRaw True (Border i i i i) True (Border i i i i) True
 tall     = renamed [Replace "tall"]
            $ smartBorders
            $ windowNavigation
-           $ addTabs shrinkText myTabTheme
            $ subLayout [] (smartBorders Simplest)
            $ limitWindows 12
            $ mySpacing 8
@@ -143,7 +142,6 @@ tall     = renamed [Replace "tall"]
 magnify  = renamed [Replace "magnify"]
            $ smartBorders
            $ windowNavigation
-           $ addTabs shrinkText myTabTheme
            $ subLayout [] (smartBorders Simplest)
            $ magnifier
            $ limitWindows 12
@@ -152,7 +150,6 @@ magnify  = renamed [Replace "magnify"]
 monocle  = renamed [Replace "monocle"]
            $ smartBorders
            $ windowNavigation
-           $ addTabs shrinkText myTabTheme
            $ subLayout [] (smartBorders Simplest)
            $ limitWindows 20 Full
 floats   = renamed [Replace "floats"]
@@ -161,7 +158,6 @@ floats   = renamed [Replace "floats"]
 grid     = renamed [Replace "grid"]
            $ smartBorders
            $ windowNavigation
-           $ addTabs shrinkText myTabTheme
            $ subLayout [] (smartBorders Simplest)
            $ limitWindows 12
            $ mySpacing 8
@@ -170,21 +166,18 @@ grid     = renamed [Replace "grid"]
 spirals  = renamed [Replace "spirals"]
            $ smartBorders
            $ windowNavigation
-           $ addTabs shrinkText myTabTheme
            $ subLayout [] (smartBorders Simplest)
            $ mySpacing' 8
            $ spiral (6/7)
 threeCol = renamed [Replace "threeCol"]
            $ smartBorders
            $ windowNavigation
-           $ addTabs shrinkText myTabTheme
            $ subLayout [] (smartBorders Simplest)
            $ limitWindows 7
            $ ThreeCol 1 (3/100) (1/2)
 threeRow = renamed [Replace "threeRow"]
            $ smartBorders
            $ windowNavigation
-           $ addTabs shrinkText myTabTheme
            $ subLayout [] (smartBorders Simplest)
            $ limitWindows 7
            -- Mirror takes a layout and rotates it by 90 degrees.
@@ -194,21 +187,11 @@ threeRow = renamed [Replace "threeRow"]
 tabs     = renamed [Replace "tabs"]
            -- I cannot add spacing to this layout because it will
            -- add spacing between window and tabs which looks bad.
-           $ tabbed shrinkText myTabTheme
 tallAccordion  = renamed [Replace "tallAccordion"]
            $ Accordion
 wideAccordion  = renamed [Replace "wideAccordion"]
            $ Mirror Accordion
 
--- setting colors for tabs layout and tabs sublayout.
-myTabTheme = def { fontName            = myFont
-                , activeColor         = color15
-                , inactiveColor       = color08
-                , activeBorderColor   = color15
-                , inactiveBorderColor = colorBack
-                , activeTextColor     = colorBack
-                , inactiveTextColor   = color16
-                }
 
 -- Theme for showWName which prints current workspace when you change workspaces.
 myShowWNameTheme :: SWNConfig
@@ -227,7 +210,6 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts float
                                  ||| magnify
                                  ||| noBorders monocle
                                  ||| floats
-                                 ||| noBorders tabs
                                  ||| grid
                                  ||| spirals
                                  ||| threeCol
@@ -277,7 +259,7 @@ myKeys =
         , ("M-S-r", spawn "xmonad --restart")         -- Restarts xmonad
         , ("M-S-q", io exitSuccess)                   -- Quits xmonad
 
-        , ("M-<Esc>", spawn "lock") -- lock screen
+        , ("M-<Esc>", spawn "betterlockscreen -l") -- lock screen
     -- KB_GROUP Get Help
         , ("M-S-/", spawn "~/.xmonad/xmonad_keys.sh") -- Get list of keybindings
         , ("M-/", spawn "dtos-help")                  -- DTOS help/tutorial videos

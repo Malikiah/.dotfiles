@@ -50,4 +50,5 @@ fi
 
 nitrogen --restore &
 picom &
+xmonad --recompile
 exec xmonad
