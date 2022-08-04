@@ -4,4 +4,6 @@
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-[[ $(fgconsole 2>/dev/null) == 1 ]] && exec startx == vt1
+#[[ $(fgconsole 2>/dev/null) == 1 ]] && exec startx == vt1
+. "$HOME/.cargo/env"
+xbindkeys
