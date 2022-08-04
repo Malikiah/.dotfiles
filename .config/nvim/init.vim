@@ -14,7 +14,8 @@ Plug 'vim-syntastic/syntastic'
 Plug 'itchyny/lightline.vim'
 " vim css color highlights the color for hex in vim files
 " https://github.com/ap/vim-css-color.git
-Plug 'ap/vim-css-color'
+" Plug 'ap/vim-css-color'
+
 call plug#end()
 
 " This is a CTRL-F keybinding to open NERD TREE
@@ -51,7 +52,7 @@ set termguicolors
 set clipboard^=unnamed,unnamedplus
 set shell=fish
 
-syntax on
+syntax enable
 
 set cursorline
 set cursorcolumn

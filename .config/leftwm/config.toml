@@ -277,3 +277,10 @@ command = "Execute"
 value = "betterlockscreen -l"
 modifier = ["modkey", "Shift"]
 key = "q"
+
+[[keybind]]
+command = "Execute"
+value = "brave"
+modifier = ["modkey"]
+key = "b"
+
