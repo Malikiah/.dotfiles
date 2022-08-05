@@ -4,19 +4,25 @@ call plug#begin('~/local/share/nvim/plugged')
 " Nerd Tree allow you to browse files throw vim.
 " https://github.com/preservim/nerdtree.git
 Plug 'preservim/nerdtree'
-" This adds icons for nerdtree
+"" This adds icons for nerdtree
 Plug 'ryanoasis/vim-devicons'
-" Syntax plugin 
-" https://github.com/vim-syntastic/syntastic.git
+"" Syntax plugin 
+"" https://github.com/vim-syntastic/syntastic.git
 Plug 'vim-syntastic/syntastic'
-" LightLine is the status bar for vim
-" https://github.com/itchyny/lightline.vim.git
+"" LightLine is the status bar for vim
+"" https://github.com/itchyny/lightline.vim.git
 Plug 'itchyny/lightline.vim'
-" vim css color highlights the color for hex in vim files
-" https://github.com/ap/vim-css-color.git
-" Plug 'ap/vim-css-color'
+"" vim css color highlights the color for hex in vim files
+"" https://github.com/ap/vim-css-color.git
+"" Plug 'ap/vim-css-color'
+"
+"Plug 'rust-lang/rust.vim'
+"
+Plug 'arcticicestudio/nord-vim'
+
 
 call plug#end()
+colorscheme nord
 
 " This is a CTRL-F keybinding to open NERD TREE
 nmap <C-F> :NERDTreeToggle<CR>
@@ -27,14 +33,13 @@ let NERDTreeChDirMode=3
 " https://github.com/itchyny/lightline.vim/blob/master/colorscheme.md
 " ------------------------------------------------------------------------------------------------------
 let g:lightline = {
-      \ 'colorscheme': 'one',
+      \ 'colorscheme': 'nord',
       \ }
 " ------------------------------------------------------------------------------------------------------
 " General Setup
 " ------------------------------------------------------------------------------------------------------
 nmap <C-t> :term<CR>
 set list
-set listchars=tab:►\ ,trail:∙
 set hidden
 set smartcase " smartcase only matches when you specify a capital 
 set ignorecase " otherwise ignore cases sensitivity.
@@ -48,7 +53,7 @@ set scrolloff=12
 set sidescrolloff=12
 set autoindent
 set smartindent
-set termguicolors
+"set termguicolors
 set clipboard^=unnamed,unnamedplus
 set shell=fish
 
@@ -56,8 +61,8 @@ syntax enable
 
 set cursorline
 set cursorcolumn
-highlight CursorLine ctermbg=Yellow cterm=bold guibg=#2b2b2b
-highlight CursorColumn ctermbg=Yellow cterm=bold guibg=#2b2b2b
+highlight CursorLine cterm=bold ctermbg=235
+highlight CursorColumn cterm=bold ctermbg=235
 
 set wildmode=longest,list,full
 

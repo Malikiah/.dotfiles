@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=xBindKeys
+Exec=xbindkeys
+#Icon=<full path to icon>
+#Comment=<optinal comments>
