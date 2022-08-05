@@ -68,3 +68,8 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 " remapping window exit key to not include pressing w
 map <C-q> <C-w>q
+
+map <C-S>left <C-w><
+map <C-S>down <C-w>-
+noremap <C-S>up :resize -5<cr>
+noremap <C-S>right :vertical resize +5<cr>

@@ -39,4 +39,9 @@ if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integr
 if [[ "$(tty)" = "/dev/tty1" ]]; then
     pgrep leftwm || startx
 fi
+
+xbindkeys
+flameshot &
+discord &
+
 fish

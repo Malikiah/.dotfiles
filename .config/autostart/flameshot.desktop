@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=FlameShot
+Exec=flameshot &
+#Icon=<full path to icon>
+#Comment=<optinal comments>

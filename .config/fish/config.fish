@@ -5,6 +5,5 @@ if status is-interactive
     alias ls='ls -lah --color=auto'
     alias ghc='ghc-9.2'
 	alias vim="nvim"
-    xbindkeys
     # Commands to run in interactive sessions can go here
 end
