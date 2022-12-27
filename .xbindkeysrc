@@ -75,6 +75,8 @@
 "amixer -D pulse set Master 1+ toggle"
     XF86AudioMute
 
+"spectacle"
+    Mod4 + g
 ##################################
 # End of xbindkeys configuration #
 ##################################

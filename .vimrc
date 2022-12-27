@@ -1,4 +1,4 @@
-: set mouse=a
+set mouse=v
 set syntax on
 set list
 set nowrap

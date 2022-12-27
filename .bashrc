@@ -29,9 +29,6 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 
-# BEGIN_KITTY_SHELL_INTEGRATION
-if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
-# END_KITTY_SHELL_INTEGRATION
 
 [ -f "/home/default/.ghcup/env" ] && source "/home/default/.ghcup/env" # ghcup-env
 . "$HOME/.cargo/env"
@@ -41,7 +38,6 @@ if [[ "$(tty)" = "/dev/tty1" ]]; then
 fi
 
 xbindkeys
-flameshot &
-discord &
-
-fish
+gammy &
+parcellite
+shopt -s extglob

@@ -16,7 +16,7 @@ Plug 'itchyny/lightline.vim'
 "" https://github.com/ap/vim-css-color.git
 "" Plug 'ap/vim-css-color'
 "
-"Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim'
 "
 Plug 'arcticicestudio/nord-vim'
 
@@ -39,6 +39,7 @@ let g:lightline = {
 " General Setup
 " ------------------------------------------------------------------------------------------------------
 nmap <C-t> :term<CR>
+set mouse=v
 set list
 set hidden
 set smartcase " smartcase only matches when you specify a capital 
@@ -58,6 +59,7 @@ set clipboard^=unnamed,unnamedplus
 set shell=fish
 
 syntax enable
+filetype plugin indent on
 
 set cursorline
 set cursorcolumn
@@ -66,15 +68,24 @@ highlight CursorColumn cterm=bold ctermbg=235
 
 set wildmode=longest,list,full
 
+nnoremap <C-s> :w<CR>
 " remapping window movement keys to not include pressing w
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 " remapping window exit key to not include pressing w
-map <C-q> <C-w>q
+nnoremap <C-q> <C-w>q
 
-map <C-S>left <C-w><
-map <C-S>down <C-w>-
-noremap <C-S>up :resize -5<cr>
-noremap <C-S>right :vertical resize +5<cr>
+" Switch to the next tab
+nnoremap <Tab> gt
+" Switch to the previous tab
+nnoremap <S-Tab> gT
+" Open new tab
+nnoremap <silent> <A-t> :tabnew<CR>
+
+" Resize splits vertical and horizontal with hjkl
+nnoremap <A-j> :resize -5<CR>
+nnoremap <A-k> :resize +5<CR>
+nnoremap <A-h> :vertical resize +5<CR>
+nnoremap <A-l> :vertical resize -5<CR>
