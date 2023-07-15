@@ -1,0 +1,8 @@
+[Desktop Entry]
+	Type=Application
+	Version=3.112.6
+	Name=tutanota-desktop
+	Comment=tutanota-desktop startup script
+	Exec=/home/default/Applications/tutanota-desktop-linux_d1499968a142b8dc7508a6e1d457ef14.AppImage -a
+	StartupNotify=false
+	Terminal=false

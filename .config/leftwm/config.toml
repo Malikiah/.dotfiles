@@ -22,6 +22,12 @@ key = "p"
 
 [[keybind]]
 command = "Execute"
+value = "spectacle"
+modifier = ["modkey", "Shift"]
+key = "s"
+
+[[keybind]]
+command = "Execute"
 value = "alacritty -e fish"
 modifier = ["modkey", "Shift"]
 key = "Return"
