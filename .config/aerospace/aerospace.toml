@@ -8,7 +8,7 @@
 # 'start-at-login' needs to be 'true' for 'after-login-command' to work
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
 after-login-command = [
-  'exec-and-forget open -na /nix/store/bfaxpp7sfm7jrc8sbraa29acjd1nvn74-MonitorControl-4.2.0'
+  'exec-and-forget open -na /nix/store/bfaxpp7sfm7jrc8sbraa29acjd1nvn74-MonitorControl-4.2.0/Applications/MonitorControl.app'
 ]
 
 # You can use it to add commands that run after AeroSpace startup.
@@ -43,16 +43,16 @@ default-root-container-orientation = 'auto'
 key-mapping.preset = 'qwerty'
 
 [workspace-to-monitor-force-assignment]
-1 = 'main'                            # Monitor sequence number from left to right. 1-based indexing
-2 = 'main'                       # Main monitor
-3 = 'main'                 # Non-main monitor in case when there are only two monitors
-4 = ['built-in Retina Display', 'main']                  # Case insensitive regex substring
-5 = ['built-in Retina Display', 'main']  # Case insensitive regex match
-6 = ['ES07D03 (1)', 'main']
-7 = ['ES07D03 (1)', 'main'] # You can specify multiple patterns. The first matching pattern will be used
-8 = []
-9 = []
-0 = []
+1 = ['main']                # Monitor sequence number from left to right. 1-based indexing
+2 = ['main']                     # Main monitor
+3 = ['main']                 # Non-main monitor in case when there are only two monitors
+4 = ['main']                  # Case insensitive regex substring
+5 = ['main']  # Case insensitive regex match
+6 = ['main']
+7 = [3, 'main'] # You can specify multiple patterns. The first matching pattern will be used
+8 = [3, 'main']
+9 = [1, 'main']
+0 = [1, 'main']
 
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
 # Possible values:
@@ -104,7 +104,7 @@ PATH = '/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}'
 #cmd-j = []
 #cmd-k = []
 
-alt-q = 'close'
+cmd-q = 'close'
 
 cmd-alt-r = 'reload-config'
 
